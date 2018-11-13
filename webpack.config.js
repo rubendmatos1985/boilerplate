@@ -1,76 +1,44 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 
-
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-const miniCssExtract = new MiniCssExtractPlugin({
-    filename: "[name].css",
-    chunkFilename: "[id].css"
-})
-const htmlPlugin = new HtmlWebPackPlugin({
-    template: "./src/index.html",
-    filename: "./index.html"
-})
-
-module.exports={
- module:{
-     rules: [
-        {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: "babel-loader"
-            
-        },
-        {
-            test: /\.html$/,
-            use:["html-loader"]
-        
-        },
-        {
-            test: /.(jpg|png)$/,
-            use:{
-                loader: "file-loader",
-                options:{
-                    name: "[name].[ext]",
-                    outputPath: "./img",
-                    publicPath: "./img"
-                }
-            }
-
+module.exports = {
+    entry: "./src/index.js",
+    output: {
+        path: path.join(__dirname, '/dist'),
+        filename: 'index_bundle.js'
+    },
+    module:{
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
+                
             },
             {
-                test: /.css$/,
-                exclude: /node_modules/,
+                test: /\.(jpg | png | gif)$/,
                 use: [
                     {
-                     loader: MiniCssExtractPlugin.loader,
-                     options:{
-                        publicPath: "./dist/styles"
-                     }
-                
+                        loader: 'file-loader',
+                        options:{
+                            name: '[path][name].[ext]',
+                            context: '',
+                            outputPath: './images'
+                        }
                     },
-                'css-loader']
+                ]
             },
             {
-                test: /.(jpg|png)$/,
-                use:{
-                    loader: "url-loader",
-                    options:{
-                        limit: 8192
-                    }
-                }
-    
-                }
-            ],
-            
- },
- optimization:{
-   splitChunks: {
-       chunks: 'all',
-       name: true,
-       filename: "[name].[ext]"
-   }
-
- },
- plugins: [htmlPlugin, miniCssExtract]
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+         
+        ]
+    },
+   
+    plugins: [
+        new HTMLWebpackPlugin({
+            template: './src/index.html'
+        })
+    ]
 }
