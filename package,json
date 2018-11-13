@@ -1,12 +1,12 @@
 {
-  "name": "movies_webapp",
+  "name": "name",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server ./src/index.js ./dist/main.js --mode development --hot",
-    "build": "webpack  ./src/index.js ./dist/main.js --mode production  --open"
+    "start": "webpack-dev-server ./src/index.js ./dist/main.js --mode development --hot", // change path here 
+    "build": "webpack  ./src/index.js ./dist/main.js --mode production  --open" // change path here
   },
   "author": "@rubendmatos",
   "license": "MIT",
