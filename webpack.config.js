@@ -2,11 +2,19 @@ const path = require('path');
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: [
+      "core-js/modules/es6.promise",
+      "core-js/modules/es6.array.iterator",
+      "@babel/polyfill",
+      "./src/index.js"],
     output: {
         path: path.join(__dirname, '/dist'),
-        filename: 'index_bundle.js'
+        filename: 'index_bundle.js',
+        crossOriginLoading: 'anonymous'
     },
+    devServer: {
+        historyApiFallback: true,
+      },
     module:{
         rules: [
             {
