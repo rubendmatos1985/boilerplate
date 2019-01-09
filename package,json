@@ -30,10 +30,12 @@
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-es2017": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-styled-components": "^1.9.2",
     "bable-loader": "0.0.1-security",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
