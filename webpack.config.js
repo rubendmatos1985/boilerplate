@@ -1,5 +1,7 @@
 const path = require('path');
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -10,10 +12,13 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/dist'),
         filename: 'index_bundle.js',
-        crossOriginLoading: 'anonymous'
+        
     },
-    devServer: {
-        historyApiFallback: true,
+    optimization: {
+        minimizer: [new UglifyJsPlugin()],
+        splitChunks: {
+            chunks: 'all'
+        }
       },
     module:{
         rules: [
@@ -47,6 +52,10 @@ module.exports = {
     plugins: [
         new HTMLWebpackPlugin({
             template: './src/index.html'
+        }),
+        new WorkboxPlugin.GenerateSW({
+          clientsClaim: true,
+          skipWaiting: true
         })
     ]
 }
